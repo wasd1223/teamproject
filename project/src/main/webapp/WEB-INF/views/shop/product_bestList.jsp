@@ -43,7 +43,10 @@
 
 	<div class="content-wrapper">
 		<div style="width: 1200px; margin: 0 auto;">
-			<h2>BEST</h2>
+			<h2>
+				<img alt="" src="${path}/images/Logo/best.JPG"
+				 style="width: 400px; height: 250px; margin: -60px 0 0 0;">
+			</h2>
 
 		</div>
 		<div class="list-view">

@@ -139,7 +139,7 @@
 						</ul></li>
 					<li><a href="#">커뮤니티</a>
 						<ul>
-							<li><a href="#">공지 사항</a></li>
+							<li><a href="#">공지 사항 (미구현)</a></li>
 							<li><a href="${path}/board/list.do">상품 이용 후기</a></li>
 							<li><a href="${path}/qnaboard/list.do">1 : 1 고객 센터</a></li>
 						</ul></li>

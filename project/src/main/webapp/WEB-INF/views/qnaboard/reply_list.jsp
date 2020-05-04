@@ -58,7 +58,7 @@
 			<%-- <c:set var="str" value="${fn:replace(str, '\\','<br>') }" /> --%>
 			<!-- c:set 태그안에는 역슬래쉬를 쓸 수 없어서 별도로 처리해야함 -->
 			<tr>
-				<td>${row.username} ( <fmt:formatDate value="${row.regdate}"
+				<td>${row.username}( <fmt:formatDate value="${row.regdate}"
 						pattern="yyyy-MM-dd a HH:mm:ss" /> )<br> ${str}
 				</td>
 			</tr>
@@ -67,7 +67,7 @@
 
 
 
-	<%@ include file="../include/footer.jsp" %>
+	<%@ include file="../include/footer.jsp"%>
 	<!-- 헤더 스크롤 에니메이션 스크립트 -->
 	<script type="text/javascript">
 		var $window = $(window), $mainHeader = $('#main-header'), $defaultLogo = '${path}/images/Logo/Logo.png', $smallLogo = '${path}/images/Logo/Logo.png';

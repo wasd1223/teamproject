@@ -36,9 +36,6 @@
 			}
 		});
 	});
-
-
-
 </script>
 
 <style type="text/css">
@@ -57,102 +54,111 @@
 	<%@ include file="../include/mainheader.jsp"%>
 
 
-<script type="text/javascript">
-function qnaboard_update() {
-	// 태그를 name으로 조회할 경우(계층구조로 접근)
-	//var product_name=document.form1.product_name.value;
-	// 태그를 id로 조회할 경우
-	var title = $("#title").val();
-	var content = $("#content").val();
-	
-	if (title == "") { //빈값이면
-		//문자열 비교 : java는 a.equal(b), javascript는 a==b
-		alert("제목을 입력하세요");
-		$("#title").focus(); //입력포커스 이동
-		return; //리턴값없이 함수 종료, 폼 데이터를 제출하지 않음
-	}
-	/* if (content == "") {
-		alert("내용을 입력하세요");
-		$("#content").focus();
-		return;
-	} */
-	/* 	if(description==""){
-	 alert("상품 설명을 입력하세요");
-	 $("#description").focus();
-	 return;
-	 } */
-	//폼 데이터를 받을 주소
-	document.form2.action = "${path}/qnaboard/update.do";
-	//폼 데이터를 서버에 전송
-	document.form2.submit();
-}
-function board_delete() {
-	document.form2.action = "${path}/qnaboard/delete.do";
-	//폼 데이터를 서버에 전송
-	document.form2.submit();
-	
-}
+	<script type="text/javascript">
+		function qnaboard_update() {
+			// 태그를 name으로 조회할 경우(계층구조로 접근)
+			//var product_name=document.form1.product_name.value;
+			// 태그를 id로 조회할 경우
+			var title = $("#title").val();
+			var content = $("#content").val();
 
+			if (title == "") { //빈값이면
+				//문자열 비교 : java는 a.equal(b), javascript는 a==b
+				alert("제목을 입력하세요");
+				$("#title").focus(); //입력포커스 이동
+				return; //리턴값없이 함수 종료, 폼 데이터를 제출하지 않음
+			}
+			/* if (content == "") {
+				alert("내용을 입력하세요");
+				$("#content").focus();
+				return;
+			} */
+			/* 	if(description==""){
+			 alert("상품 설명을 입력하세요");
+			 $("#description").focus();
+			 return;
+			 } */
+			//폼 데이터를 받을 주소
+			document.form2.action = "${path}/qnaboard/update.do";
+			//폼 데이터를 서버에 전송
+			document.form2.submit();
+		}
+		function board_delete() {
+			document.form2.action = "${path}/qnaboard/delete.do";
+			//폼 데이터를 서버에 전송
+			document.form2.submit();
 
-</script>
-	<div style="text-align: center; margin: 30px 0  30px 0; font-size: 18px; font-weight: bold;" >
-<div style="display: inline-block; text-align: left;">
-	<!-- content -->
-	<h2 style="text-align: center; font-size: 50px; font-weight: bold; margin-bottom: 20px;">수정</h2>
-	<form id="form2" name="form2" method="post" enctype="multipart/form-data">
-		<div>
-			제목 <input name="title" id="title" size="80" value="${dto.title}">
-			<input name="bno" id="bno" value="${dto.bno}" type="hidden">
-		</div>
-		<div >
-			내용
-			<textarea id="content" name="content" rows="3" cols="80" >
+		}
+	</script>
+	<div
+		style="text-align: center; margin: 30px 0 30px 0; font-size: 18px; font-weight: bold;">
+		<div style="display: inline-block; text-align: left;">
+			<!-- content -->
+			<div id="title" style="text-align: center;">
+				<h2>
+					<img alt="" src="${path}/images/Logo/수정 및 삭제.JPG"
+						style="width: 350px; height: 200px; margin: -40px 0 -5px 0;">
+				</h2>
+			</div>
+			<form id="form2" name="form2" method="post"
+				enctype="multipart/form-data">
+				<div>
+					제목 <input name="title" id="title" size="80" value="${dto.title}">
+					<input name="bno" id="bno" value="${dto.bno}" type="hidden">
+				</div>
+				<div>
+					내용
+					<textarea id="content" name="content" rows="3" cols="80">
 			${dto.content}</textarea>
-				<script type="text/javascript">
-				// ckeditor 적용
-				CKEDITOR.replace("content", {
-					filebrowserUploadUrl : "${path}/imageUpload.do"
-				});// ImageUploadController.java 에서 처리
-			</script>
-			
+					<script type="text/javascript">
+						// ckeditor 적용
+						CKEDITOR.replace("content", {
+							filebrowserUploadUrl : "${path}/imageUpload.do"
+						});// ImageUploadController.java 에서 처리
+					</script>
+
+				</div>
+				<div>
+					첨부파일을 등록하세요 <img src="${path}/images/qnaboard/${dto.picture_url}"
+						width="200px" height="200px"> <br> <input type="file"
+						name="file1" id="file1"> <label for="select_img">수정
+						후 이미지</label>
+					<div class="select_img">
+						<img src="" />
+					</div>
+					<script type="text/javascript">
+						$("#file1").change(
+								function() {
+									if (this.files && this.files[0]) {
+
+										var reader = new FileReader;
+										reader.onload = function(data) {
+											$(".select_img img").attr("src",
+													data.target.result).width(
+													200);
+										}
+
+										reader.readAsDataURL(this.files[0]);
+									}
+								});
+					</script>
+				</div>
+				<div style="text-align: center;">
+					<input type="button" value="수정" onclick="qnaboard_update()"
+						class="btn btn-lg btn-success btn-block"
+						style="width: 250px; display: inline-block; margin-bottom: 10px; margin-top: 10px;">
+					<input type="button" value="삭제" onclick="qnaboard_delete()"
+						class="btn btn-lg btn-success btn-block"
+						style="width: 250px; display: inline-block; margin-bottom: 10px; margin-top: 10px;">
+
+				</div>
+			</form>
 		</div>
-		<div>
-			첨부파일을 등록하세요
-			<img src="${path}/images/qnaboard/${dto.picture_url}" width="200px"
-						height="200px"> <br> 
-			<input type="file" name="file1" id="file1">
-						<label for="select_img">수정 후 이미지</label>
-						<div class="select_img"><img src=""/></div>
-						<script type="text/javascript">
-						 $("#file1").change(function(){
-							   if(this.files && this.files[0]) {
-								
-								var reader = new FileReader;
-							    reader.onload = function(data) {
-							     $(".select_img img").attr("src", data.target.result).width(200);        
-							    }
-							    
-							    reader.readAsDataURL(this.files[0]);
-							   }
-							  });
-						</script>
-		</div>
-		<div style="text-align: center;">
-			<input type="button" value="수정"
-					onclick="qnaboard_update()" class="btn btn-lg btn-success btn-block"
-					style="width: 250px; display: inline-block; margin-bottom: 10px; margin-top: 10px;">
-					<input type="button" value="삭제"
-					onclick="qnaboard_delete()" class="btn btn-lg btn-success btn-block"
-					style="width: 250px; display: inline-block; margin-bottom: 10px; margin-top: 10px;">
-					
-		</div>
-	</form>
-	</div>
 	</div>
 
 
-<%@ include file="../include/footer.jsp" %>
-	
+	<%@ include file="../include/footer.jsp"%>
+
 	<!-- 헤더 스크롤 에니메이션 스크립트 -->
 	<script type="text/javascript">
 		var $window = $(window), $mainHeader = $('#main-header'), $defaultLogo = '${path}/images/Logo/Logo.png', $smallLogo = '${path}/images/Logo/Logo.png';

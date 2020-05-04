@@ -38,7 +38,7 @@
 					<div style="margin-top: 10px;">
 						<ul>
 							<li style="height: 19px;"><a href="#"
-								style="color: #757c82; font-size: 11px;">코로나로 인한 배송지연 웅앵웅</a></li>
+								style="color: #757c82; font-size: 11px;">코로나로 인한 배송지연</a></li>
 						</ul>
 					</div>
 				</div>

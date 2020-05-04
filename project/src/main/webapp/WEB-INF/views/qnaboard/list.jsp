@@ -45,8 +45,6 @@ s<%@ page language="java" contentType="text/html; charset=UTF-8"
 	}
 </script>
 <style type="text/css">
-
-
 table {
 	width: 100%;
 	border: 0;
@@ -79,7 +77,6 @@ table th {
 	color: #8f8d8d;
 	font-size: 20px;
 	text-align: center;
-	
 }
 
 #wrap {
@@ -137,12 +134,12 @@ input, select, textarea {
 }
 
 #keyword {
-	
 	padding: 3px;
 	border: 1px solid #d5d5d5;
 	color: #2e2e2e;
 }
-.boardWrapper a{
+
+.boardWrapper a {
 	color: black;
 }
 </style>
@@ -156,122 +153,122 @@ input, select, textarea {
 
 		<div id="title">
 			<h2>
-				<font color="#555555">1:1 고객센터</font>
+				<img alt="" src="${path}/images/Logo/고객센터.JPG"
+					style="width: 350px; height: 200px; margin: -40px 0 -25px 0;">
 			</h2>
 		</div>
-<div class="boardWrapper">
-		<div id="content">
+		<div class="boardWrapper">
+			<div id="content">
 
-			<table border="1" width="100%">
+				<table border="1" width="100%">
 
-				<colgroup>
-					<col style="width: 70px;" />
-					<col style="width: 75px;" />
-					<col style="width: 450px;" />
-					<col style="width: 84px;" />
-					<col style="width: 77px;" />
-					<col style="width: 55px;" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th scope="col">번호</th>
-						<th scope="col">사진</th>
-						<th scope="col">제목</th>
-						<th scope="col">작성자</th>
-						<th scope="col">작성일</th>
-						<th scope="col">조회</th>
-					</tr>
-
-				</thead>
-				<tbody>
-					<c:forEach var="row" items="${map.list}">
+					<colgroup>
+						<col style="width: 70px;" />
+						<col style="width: 75px;" />
+						<col style="width: 450px;" />
+						<col style="width: 84px;" />
+						<col style="width: 77px;" />
+						<col style="width: 55px;" />
+					</colgroup>
+					<thead>
 						<tr>
-							<td>${row.bno}</td>
-							<td><img src="${path}/images/qnaboard/${row.picture_url}"
-								border="0"></td>
-							<td class="subject">
-							<c:set var="admin" value="${admin}"/>
-							<c:choose>
-							<c:when test="${sessionScope.admin_userid == 'admin'}"><a href="${path}/qnaboard/view.do?bno=${row.bno}">${row.title}</a></c:when>
-							<c:when test="${sessionScope.userid == row.writer}"><a href="${path}/qnaboard/view.do?bno=${row.bno}">${row.title}</a></c:when> 
-							<c:when test="${sessionScope.userid != row.writer}">${row.title}</c:when>
-							<c:otherwise>${row.title}</c:otherwise>
-							</c:choose>
-							<c:if	test="${row.cnt > 0}">
-									<span style="color: red;">(${row.cnt})</span>
-								</c:if></td>
-							<td>${row.username}</td>
-							<td class="txtLess"><fmt:formatDate value="${row.regdate}"
-									pattern="yyyy-MM-dd hh:mm:ss" /></td>
-							<td class="txtLess">${row.viewcnt}</td>
+							<th scope="col">번호</th>
+							<th scope="col">사진</th>
+							<th scope="col">제목</th>
+							<th scope="col">작성자</th>
+							<th scope="col">작성일</th>
+							<th scope="col">조회</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
 
-		<div id="write">
-			<button type="button" id="btnWrite" class="btn btn-lg btn-success btn-block">글쓰기</button>
-		</div>
-
-		<div id="board-paging">
-			<!-- 페이지 네비게이션 출력 -->
-			<table>
-				<tr>
-					<td><c:if test="${map.pager.curBlock > 1}">
-							<a href="#" onclick="list('1')">[처음]</a>
-						</c:if>
-						<c:if test="${map.pager.curBlock > 1}">
-							<a href="#" onclick="list('${map.pager.prevPage}')"> [이전]</a>
-						</c:if>
-						<c:forEach var="num" begin="${map.pager.blockBegin}"
-							end="${map.pager.blockEnd}">
-							<c:choose>
-								<c:when test="${num == map.pager.curPage}">
-									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
-									<span style="color: red;">${num}</span>
-								</c:when>
-								<c:otherwise>
-									<a href="#" onclick="list('${num}')">${num}</a>
-								</c:otherwise>
-							</c:choose>
+					</thead>
+					<tbody>
+						<c:forEach var="row" items="${map.list}">
+							<tr>
+								<td>${row.bno}</td>
+								<td><img src="${path}/images/qnaboard/${row.picture_url}"
+									border="0"></td>
+								<td class="subject"><c:set var="admin" value="${admin}" />
+									<c:choose>
+										<c:when test="${sessionScope.admin_userid == 'admin'}">
+											<a href="${path}/qnaboard/view.do?bno=${row.bno}">${row.title}</a>
+										</c:when>
+										<c:when test="${sessionScope.userid == row.writer}">
+											<a href="${path}/qnaboard/view.do?bno=${row.bno}">${row.title}</a>
+										</c:when>
+										<c:when test="${sessionScope.userid != row.writer}">${row.title}</c:when>
+										<c:otherwise>${row.title}</c:otherwise>
+									</c:choose> <c:if test="${row.cnt > 0}">
+										<span style="color: red;">(${row.cnt})</span>
+									</c:if></td>
+								<td>${row.username}</td>
+								<td class="txtLess"><fmt:formatDate value="${row.regdate}"
+										pattern="yyyy-MM-dd hh:mm:ss" /></td>
+								<td class="txtLess">${row.viewcnt}</td>
+							</tr>
 						</c:forEach>
-						<c:if test="${map.pager.curBlock < map.pager.totBlock}">
-							<a href="#" onclick="list('${map.pager.nextPage}')">[다음]</a>
-						</c:if>
-						<c:if test="${map.pager.curPage < map.pager.totPage}">
-							<a href="#" onclick="list('${map.pager.totPage}')">[끝]</a>
-						</c:if></td>
-				</tr>
-			</table>
+					</tbody>
+				</table>
+			</div>
 
-		</div>
+			<div id="write">
+				<button type="button" id="btnWrite"
+					class="btn btn-lg btn-success btn-block" style="margin-top: 15px;">글쓰기</button>
+			</div>
 
-		<!-- 검색폼 -->
-		<div class="search-bar" style=" margin-bottom: 30px;">
-		<form id="boardSearchForm" name="form1" method="post"
-			action="${path}/board/list.do">
-			<p>
-				<select id="search_option" name="search_option" class="option">
-					<option value="title"
-						<c:if test="${map.search_option == 'title'}">selected</c:if>>제목</option>
-					<option value="username"
-						<c:if test="${map.search_option == 'username'}">selected</c:if>>작성자</option>
-					<option value="content"
-						<c:if test="${map.search_option == 'content'}">selected</c:if>>내용</option>
-				</select> <input id="keyword" name="keyword" value="${map.keyword}"
-				class="search-text">
-				<button class="search-button">
-					<img alt="" src="${path}/images/icon/search.svg">
-				</button>
-			</p>
-		</form>
+			<div id="board-paging">
+				<!-- 페이지 네비게이션 출력 -->
+				<table>
+					<tr>
+						<td><c:if test="${map.pager.curBlock > 1}">
+								<a href="#" onclick="list('1')">[처음]</a>
+							</c:if> <c:if test="${map.pager.curBlock > 1}">
+								<a href="#" onclick="list('${map.pager.prevPage}')"> [이전]</a>
+							</c:if> <c:forEach var="num" begin="${map.pager.blockBegin}"
+								end="${map.pager.blockEnd}">
+								<c:choose>
+									<c:when test="${num == map.pager.curPage}">
+										<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+										<span style="color: red;">${num}</span>
+									</c:when>
+									<c:otherwise>
+										<a href="#" onclick="list('${num}')">${num}</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach> <c:if test="${map.pager.curBlock < map.pager.totBlock}">
+								<a href="#" onclick="list('${map.pager.nextPage}')">[다음]</a>
+							</c:if> <c:if test="${map.pager.curPage < map.pager.totPage}">
+								<a href="#" onclick="list('${map.pager.totPage}')">[끝]</a>
+							</c:if></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<!-- 검색폼 -->
+			<div class="search-bar" style="margin-bottom: 30px;">
+				<form id="boardSearchForm" name="form1" method="post"
+					action="${path}/board/list.do">
+					<p>
+						<select id="search_option" name="search_option" class="option">
+							<option value="title"
+								<c:if test="${map.search_option == 'title'}">selected</c:if>>제목</option>
+							<option value="username"
+								<c:if test="${map.search_option == 'username'}">selected</c:if>>작성자</option>
+							<option value="content"
+								<c:if test="${map.search_option == 'content'}">selected</c:if>>내용</option>
+						</select> <input id="keyword" name="keyword" value="${map.keyword}"
+							class="search-text">
+						<button class="search-button">
+							<img alt="" src="${path}/images/icon/search.svg">
+						</button>
+					</p>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 
-	<%@ include file="../include/footer.jsp" %>
-	
+	<%@ include file="../include/footer.jsp"%>
+
 	<!-- 헤더 스크롤 에니메이션 스크립트 -->
 	<script type="text/javascript">
 		var $window = $(window), $mainHeader = $('#main-header'), $defaultLogo = '${path}/images/Logo/Logo.png', $smallLogo = '${path}/images/Logo/Logo.png';

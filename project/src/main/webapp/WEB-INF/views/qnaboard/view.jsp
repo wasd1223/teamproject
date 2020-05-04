@@ -221,30 +221,32 @@
 	}
 	//첨부파일 리스트를 출력하는 함수
 	function listAttach() {
-		$.ajax({
-			type : "post",
-			url : "${path}/qnaboard/getAttach/${dto.bno}",
-			success : function(list) {
-			// Controller에서 List<String>타입으로 넘어온 값을 처리하기 위해 json으로 처리
-			// list : json
-			//console.log(list);
-			$(list).each(
-				function() {
-				var fileInfo = getFileInfo(this);
-				//console.log(fileInfo);
-				var html = "<div><a href='"+fileInfo.getLink+"'>"
-					+ fileInfo.fileName
-					+ "</a>&nbsp;&nbsp;";
-				<c:if test="${sessionScope.userid == dto.writer}">
-					html += "<a href='#' class='file_del' data-src='"
+		$
+				.ajax({
+					type : "post",
+					url : "${path}/qnaboard/getAttach/${dto.bno}",
+					success : function(list) {
+						// Controller에서 List<String>타입으로 넘어온 값을 처리하기 위해 json으로 처리
+						// list : json
+						//console.log(list);
+						$(list)
+								.each(
+										function() {
+											var fileInfo = getFileInfo(this);
+											//console.log(fileInfo);
+											var html = "<div><a href='"+fileInfo.getLink+"'>"
+													+ fileInfo.fileName
+													+ "</a>&nbsp;&nbsp;";
+											<c:if test="${sessionScope.userid == dto.writer}">
+											html += "<a href='#' class='file_del' data-src='"
 					+this+"'>[삭제]</a></div>";
-				</c:if>
-		$("#uploadedList").append(html);
+											</c:if>
+											$("#uploadedList").append(html);
 										});
 					}
 				});
 	}
-	
+
 	$(function() {
 		$("#btnEdit").click(function() {
 			location.href = "${path}/qnaboard/edit/${dto.bno}";
@@ -266,7 +268,8 @@
 	<div id="wrap">
 		<div id="title">
 			<h2>
-				<font color="#555555">문의하기</font>
+				<img alt="" src="${path}/images/Logo/고객센터.JPG"
+					style="width: 350px; height: 200px; margin: -40px 0 -25px 0;">
 			</h2>
 		</div>
 		<div id="content">
